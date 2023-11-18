@@ -1,6 +1,7 @@
 import iziToast from "izitoast";
 import SlimSelect from 'slim-select'
 import { fetchBreeds, fetchCatByBreed } from './cat-api'
+import 'slim-select/styles';
 import "izitoast/dist/css/iziToast.min.css";
 
 const selectReff = document.querySelector('.breed-select')
@@ -11,18 +12,16 @@ const catInfoReff = document.querySelector('.cat-info')
 
 errorReff.classList.add('visually-hidden')
 selectReff.classList.add('visually-hidden')
+loaderTextReff.classList.add('visually-hidden')
 
 fetchBreeds()
   .then((res) => {
     markupOptions(res)
     selectReff.classList.remove('visually-hidden')
-    loaderTextReff.classList.add('visually-hidden')
     loaderReff.classList.add('visually-hidden')
   })
   .catch(() => {
-    loaderTextReff.classList.add('visually-hidden')
     loaderReff.classList.add('visually-hidden')
-    errorReff.classList.remove('visually-hidden')
     iziToast.show({
       title: 'date',
       color: 'red',
@@ -51,6 +50,7 @@ function markupOptions(data) {
       hideSelected: true,
       display: false,
       hideSelected: true,
+      placeholderText: 'Select Value',
     }
   })
 }
@@ -62,7 +62,6 @@ selectReff.addEventListener('change', (evt) => {
   fetchCatByBreed(value)
     .then((res) => createMarkup(res))
     .catch(() => {
-      errorReff.classList.remove('visually-hidden')
       iziToast.show({
         title: 'date',
         color: 'red',
