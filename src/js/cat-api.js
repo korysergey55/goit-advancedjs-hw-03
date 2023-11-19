@@ -23,6 +23,5 @@ export const fetchCatByBreed = async (breedId) => {
   if (!responce || responce.status !== 200) {
     throw new Error(responce.statusText)
   }
-  // console.log(responce.data)
   return responce.data
 }

@@ -10,15 +10,11 @@ const loaderReff = document.querySelector('.loader')
 const errorReff = document.querySelector('.error')
 const catInfoReff = document.querySelector('.cat-info')
 
-errorReff.classList.add('visually-hidden')
-selectReff.classList.add('visually-hidden')
-loaderTextReff.classList.add('visually-hidden')
-
 fetchBreeds()
   .then((res) => {
-    markupOptions(res)
     selectReff.classList.remove('visually-hidden')
     loaderReff.classList.add('visually-hidden')
+    markupOptions(res)
   })
   .catch(() => {
     loaderReff.classList.add('visually-hidden')
@@ -28,6 +24,7 @@ fetchBreeds()
       position: 'topCenter',
       message: 'Oops! Something went wrong! Try reloading the page!'
     });
+
   })
 
 function markupOptions(data) {
@@ -54,7 +51,6 @@ function markupOptions(data) {
     },
     events: {
       afterChange: handleSelect,
-
     }
   })
 }
@@ -75,10 +71,16 @@ function markupOptions(data) {
 // })
 
 const handleSelect = (evt) => {
+  loaderReff.classList.remove('visually-hidden')
   const value = evt.map((item) => item.value).toString()
   fetchCatByBreed(value)
-    .then((res) => createMarkup(res))
+    .then((res) => {
+      loaderReff.classList.add('visually-hidden')
+      createMarkup(res)
+    })
     .catch(() => {
+      catInfoReff.innerHTML = ''
+      loaderReff.classList.add('visually-hidden')
       iziToast.show({
         title: 'date',
         color: 'red',
