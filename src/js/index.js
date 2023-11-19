@@ -51,14 +51,31 @@ function markupOptions(data) {
       display: false,
       hideSelected: true,
       placeholderText: 'Select Value',
+    },
+    events: {
+      afterChange: handleSelect,
+
     }
   })
 }
 
-selectReff.addEventListener('change', (evt) => {
-  evt.preventDefault()
-  const { value } = evt.target
+// selectReff.addEventListener('change', (evt) => {
+// evt.preventDefault()
+// const { value } = evt.target
+// fetchCatByBreed(value)
+//   .then((res) => createMarkup(res))
+//   .catch(() => {
+//     iziToast.show({
+//       title: 'date',
+//       color: 'red',
+//       position: 'topCenter',
+//       message: 'Oops! Something went wrong! Try reloading the page!'
+//     });
+//   })
+// })
 
+const handleSelect = (evt) => {
+  const value = evt.map((item) => item.value).toString()
   fetchCatByBreed(value)
     .then((res) => createMarkup(res))
     .catch(() => {
@@ -69,7 +86,7 @@ selectReff.addEventListener('change', (evt) => {
         message: 'Oops! Something went wrong! Try reloading the page!'
       });
     })
-})
+}
 
 const createMarkup = (data) => {
   const { url, breeds } = data[0]
