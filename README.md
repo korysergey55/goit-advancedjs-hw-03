@@ -1,4 +1,4 @@
-                        Task - Cat search
+Task - Cat search
 
 Create the front-end part of the application for searching information about a
 cat by its breed.
@@ -22,8 +22,9 @@ cat by its breed.
   about the cat appear under the selection in the div.cat-info block: breed
   name, description and temperament.
 
-                        Interface
 
+  Interface
+  
 - Add minimal design of interface elements.
 - Instead of select.breed-select, you can use any library with beautiful
   selects, for example https://slimselectjs.com/
